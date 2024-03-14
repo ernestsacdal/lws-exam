@@ -20,4 +20,8 @@ class AnimesController extends Controller
     {
         return $this->repository->store($request);
     }
+    public function list()
+    {
+        return $this->repository->list();
+    }
 }

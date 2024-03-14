@@ -40,4 +40,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::post('/anime', [AnimesController::class, 'store']);
+    Route::get('/anime', [AnimesController::class, 'list']);
 });
