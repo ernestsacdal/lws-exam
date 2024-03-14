@@ -18,14 +18,17 @@ use App\Http\Controllers\UsersController;
 //     return $request->user();
 // });
 
-Route::post('/users', [UsersController::class, 'store']);
+
 Route::post('/login', [UsersController::class, 'login']);
+Route::post('/users', [UsersController::class, 'store']);
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::middleware('auth:sanctum')->get('/userss', function () {
-    return response()->json(['message' => 'wow']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    
+    Route::get('/userss', function () {
+        return response()->json(['message' => 'Access granted for authenticated user.']);
+    });
+    Route::get('/logout', [UsersController::class, 'logout']);
 });

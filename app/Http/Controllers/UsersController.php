@@ -24,4 +24,8 @@ class UsersController extends Controller
     {
     return $this->repository->login($request->email, $request->password);
     }
+    public function logout(Request $request)
+    {
+        return $this->repository->logout();
+    }
 }

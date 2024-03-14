@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Interfaces\UsersInterface;
 use App\Action\Users\UsersCreateAction;
 use App\Action\Users\UsersLoginAction;
+use App\Action\Users\UsersLogoutAction;
 use Illuminate\Http\Response;
 
 class UsersRepository implements UsersInterface {
@@ -50,5 +51,25 @@ class UsersRepository implements UsersInterface {
             'status' => Response::HTTP_OK
         ], Response::HTTP_OK);
     }
+
+    public function logout()
+    {
+        $action = new UsersLogoutAction();
+        $result = $action->execute();
+    
+        if ($result) {
+            return response()->json([
+                'message' => 'Logged out successfully',
+                'status' => Response::HTTP_OK
+            ], Response::HTTP_OK);
+        }
+    
+        return response()->json([
+            'message' => 'Unauthorized - No active session or token found',
+            'status' => Response::HTTP_UNAUTHORIZED
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    
 }
 ?>
