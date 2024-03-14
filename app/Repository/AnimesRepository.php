@@ -6,6 +6,8 @@ use App\Interfaces\AnimesInterface;
 use App\Action\Anime\AnimeCreateAction;
 use App\Action\Anime\AnimeListAction;
 use App\Action\Anime\AnimeShowAction;
+use App\Action\Anime\AnimeUpdateAction;
+use App\Models\Anime;
 use Illuminate\Http\Response;
 
 class AnimesRepository implements AnimesInterface
@@ -36,6 +38,14 @@ class AnimesRepository implements AnimesInterface
         try {
             $action = new AnimeListAction();
             $animeList = $action->execute();
+
+            if ($animeList->isEmpty()) { 
+                return response()->json([
+                    'message' => 'No anime found.',
+                    'data' => [],
+                    'status' => Response::HTTP_NOT_FOUND 
+                ], Response::HTTP_NOT_FOUND);
+            }
 
             return response()->json([
                 'message' => 'Anime list retrieved successfully.',
@@ -78,5 +88,38 @@ class AnimesRepository implements AnimesInterface
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-    
+
+
+
+    public function update($request, $id)
+    {
+        try {
+            $anime = Anime::find($id); 
+
+            if (!$anime) {
+                return response()->json([
+                    'message' => 'No anime found with the provided ID.',
+                    'status' => Response::HTTP_NOT_FOUND
+                ], Response::HTTP_NOT_FOUND);
+            }
+
+            $action = new AnimeUpdateAction();
+            $updatedAnime = $action->execute($request, $anime);
+
+            return response()->json([
+                'message' => 'Anime updated successfully.',
+                'data' => $updatedAnime,
+                'status' => Response::HTTP_OK
+            ], Response::HTTP_OK);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to update the anime.',
+                'error' => $e->getMessage(),
+                'status' => Response::HTTP_INTERNAL_SERVER_ERROR
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

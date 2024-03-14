@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Interfaces\UsersInterface;
 use App\Http\Requests\Users\CreateUserRequest;
-
+use App\Http\Requests\Users\LoginUserRequest;
 class UsersController extends Controller
 {
     private UsersInterface $repository;
@@ -20,7 +20,7 @@ class UsersController extends Controller
       return $this->repository->store($request);
     }
 
-    public function login(Request $request)
+    public function login(LoginUserRequest $request)
     {
     return $this->repository->login($request->email, $request->password);
     }

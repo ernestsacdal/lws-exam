@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Interfaces\AnimesInterface;
 use App\Http\Requests\Animes\CreateAnimeRequest;
+use App\Http\Requests\Animes\UpdateAnimeRequest;
 
 class AnimesController extends Controller
 {
@@ -27,5 +28,9 @@ class AnimesController extends Controller
     public function show($id)
     {
         return $this->repository->show($id);
+    }
+    public function update(UpdateAnimeRequest $request, $id)
+    {
+        return $this->repository->update($request, $id);
     }
 }

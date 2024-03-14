@@ -8,6 +8,6 @@ class AnimeListAction
 {
     public function execute()
     {
-        return Anime::all();
+        return Anime::paginate(10);
     }
 }
