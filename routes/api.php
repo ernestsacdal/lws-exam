@@ -43,4 +43,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/anime', [AnimesController::class, 'list']);
     Route::get('/anime/{id}', [AnimesController::class, 'show']);
     Route::put('/anime/{id}', [AnimesController::class, 'update']);
+    Route::delete('/anime/{id}', [AnimesController::class, 'delete']);
 });

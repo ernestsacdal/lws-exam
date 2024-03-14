@@ -7,6 +7,7 @@ use App\Action\Anime\AnimeCreateAction;
 use App\Action\Anime\AnimeListAction;
 use App\Action\Anime\AnimeShowAction;
 use App\Action\Anime\AnimeUpdateAction;
+use App\Action\Anime\AnimeDeleteAction;
 use App\Models\Anime;
 use Illuminate\Http\Response;
 
@@ -119,6 +120,34 @@ class AnimesRepository implements AnimesInterface
                 'status' => Response::HTTP_INTERNAL_SERVER_ERROR
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public function delete($id)
+    {
+
+        try {
+            $action = new AnimeDeleteAction();
+        $success = $action->execute($id);
+
+        if ($success) {
+            return response()->json([
+                'message' => 'Anime deleted successfully.',
+                'status' => Response::HTTP_OK
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'message' => 'Anime not found.',
+                'status' => Response::HTTP_NOT_FOUND
+            ], Response::HTTP_NOT_FOUND);
+        }
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to delete the anime.',
+                'error' => $e->getMessage(),
+                'status' => Response::HTTP_INTERNAL_SERVER_ERROR
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+       
     }
 
 

@@ -33,4 +33,8 @@ class AnimesController extends Controller
     {
         return $this->repository->update($request, $id);
     }
+    public function delete($id)
+    {
+        return $this->repository->delete($id);
+    }
 }
