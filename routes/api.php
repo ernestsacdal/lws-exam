@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\AnimesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,4 +32,12 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json(['message' => 'Access granted for authenticated user.']);
     });
     Route::get('/logout', [UsersController::class, 'logout']);
+
+
+
+
+
+
+
+    Route::post('/anime', [AnimesController::class, 'store']);
 });
