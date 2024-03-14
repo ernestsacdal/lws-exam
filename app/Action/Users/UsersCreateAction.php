@@ -10,7 +10,7 @@ class UsersCreateAction
     {
         $data = $request->validated(); 
 
-        $dataSet = [
+        $dataInfo = [
             'firstName' => $data['firstName'],
             'middleName' => $data['middleName'] ?? null, 
             'lastName' => $data['lastName'],
@@ -20,7 +20,7 @@ class UsersCreateAction
             'password' => Hash::make($data['password']), 
         ];
 
-        $user = User::create($dataSet);
+        $user = User::create($dataInfo);
 
         return $user;
     }

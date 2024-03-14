@@ -19,4 +19,9 @@ class UsersController extends Controller
     {
       return $this->repository->store($request);
     }
+
+    public function login(Request $request)
+    {
+    return $this->repository->login($request->email, $request->password);
+    }
 }

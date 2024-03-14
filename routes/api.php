@@ -14,8 +14,18 @@ use App\Http\Controllers\UsersController;
 |
 */
 
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post('/users', [UsersController::class, 'store']);
+Route::post('/login', [UsersController::class, 'login']);
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/users', [UsersController::class, 'store']);
+Route::middleware('auth:sanctum')->get('/userss', function () {
+    return response()->json(['message' => 'wow']);
+});
