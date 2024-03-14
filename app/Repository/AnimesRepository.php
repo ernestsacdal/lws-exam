@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Interfaces\AnimesInterface;
 use App\Action\Anime\AnimeCreateAction;
 use App\Action\Anime\AnimeListAction;
+use App\Action\Anime\AnimeShowAction;
 use Illuminate\Http\Response;
 
 class AnimesRepository implements AnimesInterface
@@ -50,4 +51,32 @@ class AnimesRepository implements AnimesInterface
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function show($id)
+    {
+        try {
+            $action = new AnimeShowAction();
+            $anime = $action->execute($id);
+
+            if ($anime) {
+                return response()->json([
+                    'message' => 'Anime retrieved successfully.',
+                    'data' => $anime,
+                    'status' => Response::HTTP_OK
+                ], Response::HTTP_OK);
+            } else {
+                return response()->json([
+                    'message' => 'Anime not found.',
+                    'status' => Response::HTTP_NOT_FOUND
+                ], Response::HTTP_NOT_FOUND);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to retrieve the anime due to an unexpected error.',
+                'error' => $e->getMessage(),
+                'status' => Response::HTTP_INTERNAL_SERVER_ERROR
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+    
 }

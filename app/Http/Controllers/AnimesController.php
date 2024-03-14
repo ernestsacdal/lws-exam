@@ -24,4 +24,8 @@ class AnimesController extends Controller
     {
         return $this->repository->list();
     }
+    public function show($id)
+    {
+        return $this->repository->show($id);
+    }
 }
