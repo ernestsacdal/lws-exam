@@ -20,6 +20,9 @@ use App\Http\Controllers\AnimesController;
 // });
 
 
+
+
+//user auth routes
 Route::post('/login', [UsersController::class, 'login']);
 Route::post('/users', [UsersController::class, 'store']);
 
@@ -28,9 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     
-    Route::get('/userss', function () {
-        return response()->json(['message' => 'Access granted for authenticated user.']);
-    });
+    //user logout route
     Route::get('/logout', [UsersController::class, 'logout']);
 
 
@@ -38,7 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-
+    //anime routes
     Route::post('/anime', [AnimesController::class, 'store']);
     Route::get('/anime', [AnimesController::class, 'list']);
     Route::get('/anime/{id}', [AnimesController::class, 'show']);
