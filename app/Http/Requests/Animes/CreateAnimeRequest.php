@@ -27,7 +27,7 @@ class CreateAnimeRequest extends FormRequest
             'category' => 'required|string|max:255',
             'description' => 'required|string',
             'publisher' => 'required|string|max:255',
-            'thumbnail' => 'sometimes|image|mimes:jpg,png,jpeg,gif|max:10240', 
+            'thumbnail' => 'required|image|mimes:jpg,png,jpeg,gif|max:10240', 
             'type' => 'required|string|max:255',
         ];
     }

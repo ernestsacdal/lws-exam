@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersCreateAction
 {
+    //Creates a new user based on the validated request data.
     public function execute($request)
     {
         $data = $request->validated(); 

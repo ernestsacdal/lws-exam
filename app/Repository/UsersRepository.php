@@ -9,6 +9,7 @@ use App\Action\Users\UsersLogoutAction;
 use Illuminate\Http\Response;
 
 class UsersRepository implements UsersInterface {
+    //Stores a new user record in the database and generates an authentication token.
     public function store($request) {
         try {
             $action = new UsersCreateAction();
@@ -31,6 +32,7 @@ class UsersRepository implements UsersInterface {
         }   
     }
 
+    //Handles the user login process.
     public function login($email, $password)
     {
         $action = new UsersLoginAction();
@@ -51,7 +53,8 @@ class UsersRepository implements UsersInterface {
             'status' => Response::HTTP_OK
         ], Response::HTTP_OK);
     }
-
+    
+    //Handles the user logout process.
     public function logout()
     {
         $action = new UsersLogoutAction();

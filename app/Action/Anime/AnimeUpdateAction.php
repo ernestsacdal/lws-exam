@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AnimeUpdateAction
 {
+    //Updates an existing anime entity with new data.
     public function execute($request, Anime $anime)
     {
         $data = $request->validated();

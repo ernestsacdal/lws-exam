@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersLoginAction
 {
+    //Attempts to log a user in with the provided credentials.
     public function execute($email, $password)
     {
         if (!Auth::attempt(['email' => $email, 'password' => $password])) {

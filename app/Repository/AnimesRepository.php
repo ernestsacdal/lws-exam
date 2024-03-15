@@ -13,6 +13,7 @@ use Illuminate\Http\Response;
 
 class AnimesRepository implements AnimesInterface
 {
+    //Attempt to execute the anime create action, also handles success response or error response.
     public function store($request)
     {
         try {
@@ -36,6 +37,7 @@ class AnimesRepository implements AnimesInterface
 
     public function list()
     {
+        // Execute the action to retrieve a paginated list of anime
         try {
             $action = new AnimeListAction();
             $animeList = $action->execute();
@@ -66,6 +68,7 @@ class AnimesRepository implements AnimesInterface
     public function show($id)
     {
         try {
+            //utilizes the AnimeShowAction to fetch a specific anime.
             $action = new AnimeShowAction();
             $anime = $action->execute($id);
 
@@ -103,7 +106,7 @@ class AnimesRepository implements AnimesInterface
                     'status' => Response::HTTP_NOT_FOUND
                 ], Response::HTTP_NOT_FOUND);
             }
-
+            // Execute the update operation
             $action = new AnimeUpdateAction();
             $updatedAnime = $action->execute($request, $anime);
 
@@ -124,7 +127,7 @@ class AnimesRepository implements AnimesInterface
 
     public function delete($id)
     {
-
+        // create an instance of the AnimeDeleteAction class and execute the delete operation
         try {
             $action = new AnimeDeleteAction();
         $success = $action->execute($id);
