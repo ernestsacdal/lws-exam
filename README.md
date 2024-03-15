@@ -112,23 +112,28 @@ All endpoints require the `x-api-key` header for access.
 #### Create Anime
 - **POST** `/api/anime`
 - **Body**: `name`, `category`, `description`, `publisher`, `thumbnail`, `type`
+- **Headers**: `Authorization: Bearer <token>`
 - **Responses**: 201 (Anime created successfully, Return Anime Data), 422 (e.g., missing required fields, invalid thumbnail format)
 
 #### List Anime
 - **GET** `/api/anime`
+- **Headers**: `Authorization: Bearer <token>`
 - **Responses**: 200 (Returns list of anime with pagination), 404 (No anime found)
 
 #### Get Anime Details
 - **GET** `/api/anime/{id}`
+- **Headers**: `Authorization: Bearer <token>`
 - **Responses**: 200 (Returns anime details), 404 (Anime not found)
 
 #### Update Anime
 - **POST** `/api/anime/{id}?_method=PUT`
+- **Headers**: `Authorization: Bearer <token>`
 - **Body**: `name`, `category`, `description`, `publisher`, `thumbnail`, `type`
 - **Responses**: 200 (Anime updated successfully.), 404 (No anime found with the provided ID)
 
 #### Delete Anime
 - **DELETE** `/api/anime/{id}`
+- **Headers**: `Authorization: Bearer <token>`
 - **Responses**: 200 (Anime deleted successfully), 404 (Anime not found)
 
 
